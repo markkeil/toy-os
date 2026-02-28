@@ -1,4 +1,4 @@
-; boot.asm - minimal x86 bootloader
+; boot-16.asm - minimal x86 bootloader
 ; Assembled with NASM
 
 ; These instructions are for the NASM Assembler only
