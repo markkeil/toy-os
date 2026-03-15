@@ -25,9 +25,13 @@ kernel/entry.o: kernel/entry.asm
 kernel/kernel.o: kernel/kernel.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+# Compile the terminal
+kernel/terminal.o: kernel/terminal.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
 # Link the kernel file into a flat binary
-kernel/kernel.bin: kernel/entry.o kernel/kernel.o
-	$(LD) -T linker.ld -o $@ --oformat binary kernel/entry.o kernel/kernel.o
+kernel/kernel.bin: kernel/entry.o kernel/kernel.o kernel/terminal.o
+	$(LD) -T linker.ld -o $@ --oformat binary kernel/entry.o kernel/kernel.o kernel/terminal.o
 
 # Combine bootloader and kernel
 # We must pad the image to 1.44MB (floppy disk) for QEMU to recognize it
